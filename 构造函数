@@ -1,0 +1,27 @@
+#include<iostream> // 包含输入输出流库
+using namespace std; // 使用标准命名空间
+
+class MyClassType1 {
+private:
+    int x, y; // 私有成员变量 x 和 y
+public:
+    MyClassType1() { x = 0; y = 0; } // 默认构造函数，将 x 和 y 初始化为 0
+    MyClassType1(int x0) { x = x0; y = 0; } // 带一个参数的构造函数，将 x 初始化为 x0，y 初始化为 0
+    MyClassType1(int x0, int y0); // 带两个参数的构造函数的声明
+    void display() {
+        cout << "x=" << x << ",y=" << y << endl; // 输出 x 和 y 的值
+    }
+};
+
+MyClassType1::MyClassType1(int x0, int y0) {
+    x = x0; y = y0; // 带两个参数的构造函数的定义，将 x 初始化为 x0，y 初始化为 y0
+}
+
+int main() {
+    MyClassType1 obj1; // 创建 MyClassType1 类型的对象 obj1，调用默认构造函数
+    MyClassType1 obj2(21), obj3(31, 32); // 创建 MyClassType1 类型的对象 obj2 和 obj3，分别调用带一个参数和带两个参数的构造函数
+    obj1.display(); // 调用 obj1 的 display 函数，输出 x 和 y 的值
+    obj2.display(); // 调用 obj2 的 display 函数，输出 x 和 y 的值
+    obj3.display(); // 调用 obj3 的 display 函数，输出 x 和 y 的值
+    return 0; // 返回 0，表示程序正常结束
+}
