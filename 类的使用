@@ -1,0 +1,53 @@
+#include<iostream> // 包含输入输出流库
+using namespace std; // 使用标准命名空间
+
+// 定义一个名为 MyClassType1 的类
+class MyClassType1 {
+private:
+	int x, y; // 私有成员变量 x 和 y
+public:
+	int getx() { return x; } // 获取 x 的值
+	int gety(); // 获取 y 的值（在类外定义）
+	void setx(int x0) { x = x0; } // 设置 x 的值
+	void sety(int y0); // 设置 y 的值（在类外定义）
+	void displayx() { cout << "x=" << x << endl; } // 显示 x 的值
+	void displayy() { cout << "y=" << y << endl; } // 显示 y 的值
+};
+
+// 在类外定义 gety 函数，返回 y 的值
+int MyClassType1::gety() { return y; }
+
+// 在类外定义 sety 函数，设置 y 的值
+void MyClassType1::sety(int y0) { y = y0; }
+
+// 主函数
+int main() {
+	MyClassType1 obj1, * p, objArr[10]; // 创建 MyClassType1 类型的对象 obj1，指针 p 和对象数组 objArr
+	obj1.setx(111); // 设置 obj1 的 x 值为 111
+	//cout << obj1.displayx() << endl; // 注释掉的代码，显示 obj1 的 x 值
+	cout << obj1.getx() << endl; // 输出 obj1 的 x 值
+	obj1.displayx(); // 显示 obj1 的 x 值
+
+	p = new MyClassType1; // 动态分配一个 MyClassType1 对象，并将指针 p 指向它
+	(*p).setx(56); // 设置 p 指向对象的 x 值为 56
+	p->sety(78); // 设置 p 指向对象的 y 值为 78
+	int k = (*p).getx(); // 获取 p 指向对象的 x 值，并赋值给 k
+	int m = p->gety(); // 获取 p 指向对象的 y 值，并赋值给 m
+	cout << "k=" << k << endl; // 输出 k 的值
+	cout << "m=" << m << endl; // 输出 m 的值
+
+	for (int i = 0; i < 5; i++) { // 循环设置 objArr 数组前 5 个对象的 x 和 y 值
+		objArr[i].setx(i + 10); // 设置 objArr[i] 的 x 值
+		objArr[i].sety(i + 20); // 设置 objArr[i] 的 y 值
+	}
+	p = &objArr[9]; // 将指针 p 指向 objArr 数组的最后一个元素
+	while (p >= &objArr[5]) { // 循环修改 objArr 数组后 5 个对象的 x 和 y 值,比较的是地址
+		p->setx(88); // 设置 p 指向对象的 x 值为 88
+		p->sety(99); // 设置 p 指向对象的 y 值为 99
+		p--; // 指针 p 向前移动一个位置,移动MyClassType1对象的大小
+	}
+	for (int i = 0; i < 10; i++) { // 循环输出 objArr 数组中所有对象的 x 和 y 值
+		cout << objArr[i].getx() << " " << objArr[i].gety() << endl; // 输出 objArr[i] 的 x 和 y 值
+	}
+	return 0; // 返回 0，表示程序正常结束
+}
