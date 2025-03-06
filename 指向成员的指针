@@ -1,0 +1,24 @@
+#include<iostream> // 包含输入输出流库
+using namespace std; // 使用标准命名空间
+
+class X
+{
+public:
+	void f(int); // 声明一个成员函数 f，接受一个 int 类型的参数
+	int a; // 声明一个公有成员变量 a
+};
+
+void X::f(int x) {
+	a = x; // 定义成员函数 f，将参数 x 的值赋给成员变量 a
+}
+
+int main() {
+	int X::* pmi = &X::a; // 定义一个指向 X 类中 int 类型成员变量的指针 pmi，并将其初始化为指向成员变量 a
+	void (X:: * pmf)(int) = &X::f; // 定义一个指向 X 类中接受 int 参数的成员函数的指针 pmf，并将其初始化为指向成员函数 f
+	X objx; // 创建一个 X 类的对象 objx
+	objx.*pmi = 10; // 通过指针 pmi 访问 objx 的成员变量 a，并将其值设置为 10
+	cout << objx.a << endl; // 输出 objx 的成员变量 a 的值，结果是 10
+	(objx.*pmf)(5); // 通过指针 pmf 调用 objx 的成员函数 f，并传递参数 5
+	cout << objx.a << endl; // 输出 objx 的成员变量 a 的值，结果是 5，因为 f 函数将 a 的值设置为 5
+	return 0; // 返回 0，表示程序正常结束
+}
